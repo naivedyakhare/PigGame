@@ -184,4 +184,5 @@ img {
     background-color: rgba(0, 0, 0, 0);
     top: 2%;
     right: 2%;
+    cursor: pointer;
 }
