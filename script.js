@@ -105,8 +105,30 @@ const completeGame = function ()
     endGame2.classList.add('overlay');
 }
 
+//Help Menu
+const showHelp = function ()
+{
+    const overlayHelp = document.querySelectorAll('.overlay2');
+    overlayHelp[0].classList.remove('overlay2');
+    overlayHelp[1].classList.remove('overlay2');
+}
+const returnFromHelp = function ()
+{
+    const overlayHelp1 = document.querySelector('.helpWindow');
+    const overlayHelp2 = document.querySelector('.blacky');
+    
+    if(!overlayHelp1.classList.contains('overlay2') && !overlayHelp2.classList.contains('overlay2')){
+        overlayHelp1.classList.add('overlay2');
+        overlayHelp2.classList.add('overlay2');
+    }
+}
+
 //Event Listeners
 document.querySelector('.rollDice').addEventListener('click', rollTheDice);
 document.querySelector('.hold').addEventListener('click', addValue);
 document.querySelector('.newGame').addEventListener('click', completeGame);
 document.querySelector('.overlayNewGame').addEventListener('click', completeGame);
+document.querySelector('.help').addEventListener('click', showHelp);
+document.querySelector('.blacky').addEventListener('click', returnFromHelp);
+document.querySelector('.closeHelp').addEventListener('click', returnFromHelp)
+document.addEventListener('keydown', returnFromHelp);

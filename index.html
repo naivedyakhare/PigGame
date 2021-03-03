@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <button class='help'>❓</button>
     <div class="container">
         <button class='newGame'>🎮 New Game</button>
         <button class='rollDice'>🎲 Roll Dice</button>
@@ -40,9 +41,22 @@
 
     <div class="overlay endGame"></div>
     <div class="overlay modalWindow">
-        <h1 class='winnerDeclaration'>PLAYER 1 WON THE GAME!<br><br>😍🎆🎈🎇🧨✨🎉🎊🎁🎀🎗</h1>
+        <h1 class='winnerDeclaration'></h1>
         <button class='overlayNewGame'>🎮 New Game</button>
     </div>
+
+    <div class="overlay2 blacky"></div>
+    <div class="overlay2 helpWindow">
+        <h1 class='helpH1'>HELP❓</h1>
+        <button class='closeHelp'>❌</button>
+        <p class='helpText'>1: New Game reset's the game<br><br>2: Roll dice button will Roll the dice and add the
+            number
+            appeared on the Dice to the Current Score. Each time you roll the dice, the number adds up, unless the
+            number appeared is 1, then it will reset the current score to 0 and pass the dice to the
+            nextplayer.<br><br>3:Hold button will add the value to the total Score on the top left and top right of the
+            player window and passes the dice to the next player.<br><br>4: Each player gets 10 chances.</p>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

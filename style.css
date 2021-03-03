@@ -6,6 +6,7 @@ body {
     margin: 0px;
     background: linear-gradient(to bottom right, rgb(212, 4, 49), rgb(233, 37, 145));
     text-align: center;
+    background-attachment: fixed;
 }
 
 .container{
@@ -96,7 +97,7 @@ img {
 
 
 .endGame {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.658);
@@ -116,8 +117,7 @@ img {
     flex-direction: column; 
     justify-content: space-around;
     align-items: center;
-    
-background-color: white;
+    background-color: white;
 }
 
 .overlayNewGame {
@@ -135,4 +135,53 @@ background-color: white;
 }
 .overlay {
     display: none;
+}
+
+.blacky {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.637), rgba(0, 0, 0, 0.637));
+    top: 0%;
+    position: fixed;
+    display: block;
+}
+
+.helpWindow {
+    position: absolute;
+    top: 0%;
+    width: 65%;
+    height: 560px;
+    margin-top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    text-align: left;
+    padding: 20px;
+}
+.closeHelp {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    border: none;
+    background-color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.overlay2 {
+    display: none;
+}
+
+.help {
+    position: absolute;
+    border: none;
+    font-size: 40px;
+    background-color: rgba(0, 0, 0, 0);
+    top: 2%;
+    right: 2%;
 }
