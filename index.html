@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <button class='newGame'>🎮 New Game</button>
+        <button class='rollDice'>🎲 Roll Dice</button>
+        <button class='hold'>🛑 Hold</button>
+        <div class="player1 player">
+            <h1>Player 1</h1>
+            <div class="player1Score score">0</div>
+            <div class="player1Current currentScore">
+                <p class="current">Current</p>
+                <p class="current1Value currentValue">0</p>
+            </div>
+        </div>
+        <div class="player2 player">
+            <h1>Player 2</h1>
+            <div class="player2Score score">0</div>
+            <div class="player2Current currentScore">
+                <p class="current">Current</p>
+                <p class="current2Value currentValue">0</p>
+            </div>
+        </div>
+    </div>
+    <img class='img1 img' src="img/dice1.png" alt="1">
+    <img class='img2 img' src="img/dice2.png" alt="2">
+    <img class='img3 img' src="img/dice3.png" alt="3">
+    <img class='img4 img' src="img/dice4.png" alt="4">
+    <img class='img5 img' src="img/dice5.png" alt="5">
+    <img class='img6 img' src="img/dice6.png" alt="6">
+
+    <div class="overlay endGame"></div>
+    <div class="overlay modalWindow">
+        <h1 class='winnerDeclaration'>PLAYER 1 WON THE GAME!<br><br>😍🎆🎈🎇🧨✨🎉🎊🎁🎀🎗</h1>
+        <button class='overlayNewGame'>🎮 New Game</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
