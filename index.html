@@ -2,62 +2,55 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Pig Game</title>
 </head>
 
 <body>
-    <button class='help'>❓</button>
-    <div class="container">
-        <button class='newGame'>🎮 New Game</button>
-        <button class='rollDice'>🎲 Roll Dice</button>
-        <button class='hold'>🛑 Hold</button>
-        <div class="player1 player">
-            <h1>Player 1</h1>
-            <div class="player1Score score">0</div>
-            <div class="player1Current currentScore">
-                <p class="current">Current</p>
-                <p class="current1Value currentValue">0</p>
-            </div>
+    <div class='modal modal--help'>
+        <button class="modal__btn modal__btn--help"> H E L P ❓</button>
+        <div class="modal__window modal__window--help modal--hidden-1">
+            <button class='modal__window--close'>❌</button>
+            <h1>- HELP DESK -</h1>
+            <p> 1. Roll Dice Button will roll the dice and whatever number pops up will be stored in your 'current'
+                value.</p>
+            <p> 2. Pressing Hold Button will store the total 'Current' value in your Total Score.</p>
+            <p> 3. If the value of dice is 1, the current value becomes 0 and the next player gets chance.</p>
+            <p> 4. Both players will get 10 chances. Whoever has the higest score by the end of the game will be the
+                winner.</p>
+            <p> 5. It's all about luck.</p>
+            </p>
         </div>
-        <div class="player2 player">
-            <h1>Player 2</h1>
-            <div class="player2Score score">0</div>
-            <div class="player2Current currentScore">
-                <p class="current">Current</p>
-                <p class="current2Value currentValue">0</p>
+        <div class="modal__overlay--help modal--hidden-2"></div>
+    </div>
+    <main>
+        <section class="player player--0 player--active">
+            <h2 class="name" id="name--0">Player 1</h2>
+            <p class="score" id="score--0">43</p>
+            <div class="current">
+                <p class="current-label">Current</p>
+                <p class="current-score" id="current--0">0</p>
             </div>
-        </div>
-    </div>
-    <img class='img1 img' src="img/dice1.png" alt="1">
-    <img class='img2 img' src="img/dice2.PNG" alt="2">
-    <img class='img3 img' src="img/dice3.PNG" alt="3">
-    <img class='img4 img' src="img/dice4.PNG" alt="4">
-    <img class='img5 img' src="img/dice5.PNG" alt="5">
-    <img class='img6 img' src="img/dice6.PNG" alt="6">
+        </section>
+        <section class="player player--1">
+            <h2 class="name" id="name--1">Player 2</h2>
+            <p class="score" id="score--1">24</p>
+            <div class="current">
+                <p class="current-label">Current</p>
+                <p class="current-score" id="current--1">0</p>
+            </div>
+        </section>
 
-    <div class="overlay endGame"></div>
-    <div class="overlay modalWindow">
-        <h1 class='winnerDeclaration'></h1>
-        <button class='overlayNewGame'>🎮 New Game</button>
-    </div>
-
-    <div class="overlay2 blacky"></div>
-    <div class="overlay2 helpWindow">
-        <h1 class='helpH1'>HELP❓</h1>
-        <button class='closeHelp'>❌</button>
-        <p class='helpText'>1: New Game reset's the game<br><br>2: Roll dice button will Roll the dice and add the
-            number
-            appeared on the Dice to the Current Score. Each time you roll the dice, the number adds up, unless the
-            number appeared is 1, then it will reset the current score to 0 and pass the dice to the
-            nextplayer.<br><br>3:Hold button will add the value to the total Score on the top left and top right of the
-            player window and passes the dice to the next player.<br><br>4: Each player gets 10 chances.</p>
-    </div>
-
+        <img src="dice5.jpg" alt="Playing dice" class="dice" />
+        <button class="btn btn--new">🔄 New game</button>
+        <button class="btn btn--roll">🎲 Roll dice</button>
+        <button class="btn btn--hold">📥 Hold</button>
+    </main>
     <script src="script.js"></script>
+
 </body>
 
 </html>

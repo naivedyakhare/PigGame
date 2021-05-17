@@ -1,134 +1,120 @@
-'use strict'
+'use strict';
 
-let player = 1;
-let turn = 1;
+// Selecting elements
+const player0El = document.querySelector('.player--0');
+const player1El = document.querySelector('.player--1');
+const score0El = document.querySelector('#score--0');
+const score1El = document.getElementById('score--1');
+const current0El = document.getElementById('current--0');
+const current1El = document.getElementById('current--1');
 
-//PLAYER TURN
-const turnReset = function (playerScore)
-{
-    playerScore.textContent = 0;
-    
-        if(player === 1) player++;
-        else 
-        {
-            player--;
-            turn++;
-            console.log(turn);
-        }
-}
-const addToCurrent = function (diceValue)
-{
-    const playerScore = document.querySelector('.current'+player+'Value');
-    
-    if(diceValue !== 1){
-        playerScore.textContent = Number(playerScore.textContent) + Number(diceValue);
+const diceEl = document.querySelector('.dice');
+const btnNew = document.querySelector('.btn--new');
+const btnRoll = document.querySelector('.btn--roll');
+const btnHold = document.querySelector('.btn--hold');
+const btnHelp = document.querySelector('.modal__btn--help');
+const btnHelpClose = document.querySelector('.modal__window--close');
+const modalOverlay = document.querySelector('.modal__overlay--help');
+const modalWindow = document.querySelector('.modal__window--help');
+
+let scores, currentScore, activePlayer, playing;
+
+// Starting conditions
+const init = function () {
+  scores = [0, 0];
+  currentScore = 0;
+  activePlayer = 0;
+  playing = true;
+
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+
+  diceEl.classList.add('hidden');
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+};
+init();
+
+const switchPlayer = function () {
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  currentScore = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active');
+};
+
+// Rolling dice functionality
+btnRoll.addEventListener('click', function () {
+  if (playing) {
+    // 1. Generating a random dice roll
+    const dice = Math.trunc(Math.random() * 6) + 1;
+
+    // 2. Display dice
+    diceEl.classList.remove('hidden');
+    diceEl.src = `img/dice${dice}.jpg`;
+
+    // 3. Check for rolled 1
+    if (dice !== 1) {
+      // Add dice to current score
+      currentScore += dice;
+      document.getElementById(
+        `current--${activePlayer}`
+      ).textContent = currentScore;
+    } else {
+      // Switch to next player
+      switchPlayer();
     }
-    else
-    {
-        turnReset(playerScore);
+  }
+});
+
+btnHold.addEventListener('click', function () {
+  if (playing) {
+    // 1. Add current score to active player's score
+    scores[activePlayer] += currentScore;
+
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
+
+    // 2. Check if player's score is >= 100
+    if (scores[activePlayer] >= 100) {
+      // Finish the game
+      playing = false;
+      diceEl.classList.add('hidden');
+
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+    } else {
+      // Switch to the next player
+      switchPlayer();
     }
+  }
+});
+
+const modalAppear = function() {
+  modalWindow.classList.remove('modal--hidden-1');
+  modalOverlay.classList.remove('modal--hidden-2');  
+}
+const modalDisappear = function() {
+  modalWindow.classList.add('modal--hidden-1');
+  modalOverlay.classList.add('modal--hidden-2');
 }
 
-//DICE IMAGES
-const resetImage = function ()
-{
-    const resetImg = document.querySelectorAll('.img');
-    for(let i = 1; i <= 6; i++)
-    {
-        if(!resetImg[i-1].classList.contains('img'+i))   
-            resetImg[i-1].classList.add('img'+i)
-    }
-}
-const showImage = function (diceValue) 
-{
-    resetImage();
-    document.querySelector('.img'+diceValue).classList.remove('img'+diceValue);
-}
+btnNew.addEventListener('click', init);
+btnHelp.addEventListener('click', modalAppear);
+btnHelpClose.addEventListener('click', modalDisappear);
+modalOverlay.addEventListener('click', modalDisappear)
 
-//RANDOM DICE GENERATOR
-const rollTheDice = function () {
-    if(turn <= 10)
-    { 
-        const diceValue = Math.floor(Math.random() * 6 + 1);
-        showImage(diceValue);
-        addToCurrent(diceValue);
-    }
-    else {
-
-        const winner = document.querySelector('.winnerDeclaration'); 
-        const scoreCompare = document.querySelectorAll('.score');
-
-        if(scoreCompare[0].textContent > scoreCompare[1].textContent) winner.textContent = `Player 1 Won the 
-        😍🎆🎈🎇🧨✨🎉🎊🎁🎀🎗`;
-        else if(scoreCompare[0].textContent < scoreCompare[1].textContent) winner.textContent = `Player 2 Won the Game
-        😍🎆🎈🎇🧨✨🎉🎊🎁🎀🎗`;
-        else winner.textContent = `It's a tie lmao`;
-
-        const endGame1 = document.querySelector('.endGame');
-        const endGame2 = document.querySelector('.modalWindow');
-        endGame1.classList.remove('overlay');
-        endGame2.classList.remove('overlay');
-    }
-}
-
-//HOLDING VALUE
-const addValue = function ()
-{
-    const playerScore = document.querySelector('.current'+player+'Value');
-    const totalScore = document.querySelector('.player'+player+'Score');
-    
-    totalScore.textContent = Number(playerScore.textContent) + Number(totalScore.textContent);
-
-    turnReset(playerScore);
-}
-
-
-//New Game
-const completeGame = function ()
-{
-    player = 1;
-    turn = 1;
-
-    const currentReset = document.querySelectorAll('.currentValue');
-    const scoreReset = document.querySelectorAll('.score');
-
-    for(let i = 0; i < 2; i++)
-    {
-        currentReset[i].textContent = 0;
-        scoreReset[i].textContent = 0;
-    }
-    resetImage();
-    const endGame1 = document.querySelector('.endGame');
-    const endGame2 = document.querySelector('.modalWindow');
-    
-    endGame1.classList.add('overlay');
-    endGame2.classList.add('overlay');
-}
-
-//Help Menu
-const showHelp = function ()
-{
-    const overlayHelp = document.querySelectorAll('.overlay2');
-    overlayHelp[0].classList.remove('overlay2');
-    overlayHelp[1].classList.remove('overlay2');
-}
-const returnFromHelp = function ()
-{
-    const overlayHelp1 = document.querySelector('.helpWindow');
-    const overlayHelp2 = document.querySelector('.blacky');
-    
-    if(!overlayHelp1.classList.contains('overlay2') && !overlayHelp2.classList.contains('overlay2')){
-        overlayHelp1.classList.add('overlay2');
-        overlayHelp2.classList.add('overlay2');
-    }
-}
-
-//Event Listeners
-document.querySelector('.rollDice').addEventListener('click', rollTheDice);
-document.querySelector('.hold').addEventListener('click', addValue);
-document.querySelector('.newGame').addEventListener('click', completeGame);
-document.querySelector('.overlayNewGame').addEventListener('click', completeGame);
-document.querySelector('.help').addEventListener('click', showHelp);
-document.querySelector('.blacky').addEventListener('click', returnFromHelp);
-document.querySelector('.closeHelp').addEventListener('click', returnFromHelp)
-document.addEventListener('keydown', returnFromHelp);
+// MODAL FUNCTION USING ESC.
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'Escape' && !modalWindow.classList.contains('modal--hidden-1')) {
+    modalDisappear();
+  }
+})
